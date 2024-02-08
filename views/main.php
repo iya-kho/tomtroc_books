@@ -8,7 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-    <ul>
-      <li><a href="index.php?action=home">Home</a></li>
-      <li><a href="index.php?action=books">Books</a></li>
-    </ul>
+    <header>
+      <div>Header</div>
+    </header>
+    <main>
+      <?= $content ?>
+    </main>
+    <footer>
+      <div>Footer</div>
+    </footer>
+  </body>
+</html>

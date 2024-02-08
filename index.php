@@ -1,23 +1,26 @@
 <?php 
 
-// require_once 'config/config.php';
-// require_once 'config/autoload.php';
-require_once 'utils/Utils.php';
+require_once 'config/config.php';
+require_once 'config/autoload.php';
 
 // Get the action to perform
 // If no action is specified, we will display the home page
 $action = Utils::request('action', 'home');
 
-// Try catch global pour gérer les erreurs
+// Global try/catch block
 try {
-    // Pour chaque action, on appelle le bon contrôleur et la bonne méthode.
     switch ($action) {
-        // Pages accessibles à tous.
+        // Pages accessible to everyone
         case 'home':
           require_once 'views/pages/home.php';
           break;
         case 'books':
-          require_once 'views/pages/books.php';
+          $bookController = new BookController();
+          $bookController->showAllBooks();
+          break;
+        case 'book':
+          $bookController = new BookController();
+          $bookController->showBook();
           break;
         default:
           throw new Exception("The requested page does not exist.");
