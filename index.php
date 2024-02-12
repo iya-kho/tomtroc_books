@@ -20,7 +20,7 @@ try {
           break;
         case 'book':
           $bookController = new BookController();
-          $bookController->showBook();
+          $bookController->showOneBook();
           break;
         default:
           throw new Exception("The requested page does not exist.");

@@ -19,7 +19,7 @@ class BookController
     //  * Show a book
     //  * @return void
     //  */
-    public function showBook() : void
+    public function showOneBook() : void
     {
         // Get the id of the requested book
         $id = Utils::request("id", -1);
@@ -32,7 +32,7 @@ class BookController
         }
 
         $view = new View($book->getTitle());
-        $view->render("detailBook", ['book' => $book]);
+        $view->render("book", ['book' => $book]);
     }
 
     // /**
