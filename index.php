@@ -12,7 +12,7 @@ try {
     switch ($action) {
         // Pages accessible to everyone
         case 'home':
-          require_once 'views/pages/home.php';
+          require_once 'views/templates/home.php';
           break;
         case 'books':
           $bookController = new BookController();
