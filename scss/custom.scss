@@ -11,27 +11,45 @@ a {
   font-family: $font-secondary;
 }
 
-.container-fluid {
-  max-width: 1400px;
-}
-
 header {
+  .navbar-brand .fs-10 {
+    @include desktop {
+      font-size: 20px !important;
+    }
+  }
   .logo {
     height: 25px;
     width: 25px;
+    @include desktop {
+      height: 50px;
+      width: 50px;
+    }
   }
   .logo svg{
     height: 13px;
     width: 17px;
+    @include desktop {
+      height: 25px;
+      width: 32px;
+    }
   }
+
   .navbar-toggler {
     border: none;
   }
 
   .nav-link {
     font-family: $font-secondary;
-    font-size: 14px;
+    @include desktop {
+      padding: 0;
+    }
   }
+
+  .nav-link svg {
+    height: 14px;
+    width: auto;
+  }
+
 }
 
 

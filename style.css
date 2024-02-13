@@ -12,7 +12,7 @@ a {
   font-family: "Inter", sans-serif;
 }
 
-@media (min-width: 992px) {
+@media (min-width: 768px) {
   header .navbar-brand .fs-10 {
     font-size: 20px !important;
   }
@@ -21,7 +21,7 @@ header .logo {
   height: 25px;
   width: 25px;
 }
-@media (min-width: 992px) {
+@media (min-width: 768px) {
   header .logo {
     height: 50px;
     width: 50px;
@@ -31,7 +31,7 @@ header .logo svg {
   height: 13px;
   width: 17px;
 }
-@media (min-width: 992px) {
+@media (min-width: 768px) {
   header .logo svg {
     height: 25px;
     width: 32px;
@@ -42,15 +42,6 @@ header .navbar-toggler {
 }
 header .nav-link {
   font-family: "Inter", sans-serif;
-}
-@media (min-width: 992px) {
-  header .nav-link {
-    padding: 0;
-  }
-}
-header .nav-link svg {
-  height: 14px;
-  width: auto;
 }
 
 /*!
@@ -814,7 +805,7 @@ progress {
 }
 @media (min-width: 1200px) {
   .container-xl, .container-lg, .container-md, .container-sm, .container {
-    max-width: 1100px;
+    max-width: 1140px;
   }
 }
 @media (min-width: 1400px) {
