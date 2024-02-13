@@ -27,27 +27,27 @@
           <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
             <ul class="nav navbar-nav">
               <li class="nav-item me-20 me-xl-40">
-                <a class="nav-link fs-14"href="index.php?action=home">Accueil</a>
+                <a class="nav-link fs-14 font-secondary"href="index.php?action=home">Accueil</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link fs-14" href="index.php?action=books">Nos livres à l'échange</a>
+                <a class="nav-link fs-14 font-secondary" href="index.php?action=books">Nos livres à l'échange</a>
               </li>
             </ul>
             <ul class="nav navbar-nav border-start">
               <li class="nav-item ms-25 ms-xl-55">
-                <a class="nav-link fs-14 d-flex align-items-center" href="index.php?action=messenger">
+                <a class="nav-link fs-14 font-secondary d-flex align-items-center" href="index.php?action=messenger">
                   <?php include('img/icons/messenger.svg') ?>
                   <span class="ms-5">Messagerie</span>
                 </a>
               </li>
               <li class="nav-item ms-25 ms-xl-55">
-                <a class="nav-link fs-14 d-flex align-items-center" href="index.php?action=account">
+                <a class="nav-link fs-14 font-secondary d-flex align-items-center" href="index.php?action=account">
                   <?php include('img/icons/account.svg') ?>
                   <span class="ms-5">Mon compte</span>
                 </a>
               </li>
               <li class="nav-item ms-25 ms-xl-55">
-                <a class="nav-link fs-14" href="index.php?action=login">Connexion</a>
+                <a class="nav-link fs-14 font-secondary" href="index.php?action=login">Connexion</a>
               </li>
             </ul>  
           </div>
@@ -57,8 +57,13 @@
     <main>
       <?= $content ?>
     </main>
-    <footer>
-      <div>Footer</div>
+    <footer class="container-fluid p-30 p-lg-25">
+      <ul class="list-unstyled font-secondary fs-12 d-flex flex-column flex-lg-row align-items-center justify-content-lg-end">
+        <li class="mb-25 mb-lg-0 me-lg-40"><a href="#">Politique de confidentialité</a></li>
+        <li class="mb-25 mb-lg-0 me-lg-40"><a href="#">Mentions légales</a></li>
+        <li class="mb-25 mb-lg-0 me-lg-40">Tom Troc©</li>
+        <li class="logo"><?php include('img/icons/logo.svg') ?></li>
+      </ul>
     </footer>
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   </body>

@@ -1,7 +1,4 @@
-a {
-  text-decoration: none;
-  color: #000;
-}
+//Global styles
 
 .font-primary {
   font-family: $font-primary;
@@ -10,6 +7,8 @@ a {
 .font-secondary {
   font-family: $font-secondary;
 }
+
+//Header
 
 header {
   .navbar-brand .fs-10 {
@@ -39,7 +38,6 @@ header {
   }
 
   .nav-link {
-    font-family: $font-secondary;
     @include desktop {
       padding: 0;
     }
@@ -50,6 +48,18 @@ header {
     width: auto;
   }
 
+}
+
+//Footer
+footer {
+  .logo svg path {
+    fill: $primary;
+  }
+
+  .logo svg {
+    width: 22px;
+    height: auto;
+  }
 }
 
 
