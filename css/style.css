@@ -18195,6 +18195,10 @@ textarea.form-control-lg {
   font-family: "Inter", sans-serif;
 }
 
+.text-transparent {
+  color: #A6A6A6;
+}
+
 h1, .h1 {
   font-size: 30px;
 }
@@ -18247,11 +18251,10 @@ header .nav-link svg {
     border-top: solid 1px #000;
   }
 }
-
-.search {
+.books-container .search {
   height: 50px;
 }
-.search svg {
+.books-container .search svg {
   width: 18px;
   height: auto;
   position: absolute;
@@ -18260,13 +18263,39 @@ header .nav-link svg {
   transform: translateY(-50%);
   z-index: 100;
 }
-.search input::placeholder {
+.books-container .search input::placeholder {
   color: #A6A6A6;
 }
 @media (min-width: 992px) {
-  .search {
+  .books-container .search {
     width: 322px;
   }
+}
+@media (min-width: 375px) {
+  .books-container .card-title {
+    font-size: 14px !important;
+  }
+}
+@media (min-width: 992px) {
+  .books-container .card-title {
+    font-size: 16px !important;
+  }
+}
+@media (min-width: 992px) {
+  .books-container .card-title {
+    font-size: 14px !important;
+  }
+}
+@media (min-width: 992px) {
+  .books-container .card-text {
+    font-size: 10px !important;
+  }
+}
+.books-container .availability {
+  top: 15px;
+  right: 12px;
+  background-color: #C56D6D;
+  border-radius: 30px;
 }
 
 footer .logo svg path {

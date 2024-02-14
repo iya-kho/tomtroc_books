@@ -2,6 +2,7 @@
 $primary: #00AC66;
 $light: #FAF9F7;
 $dark: #F5F3EF;
+$text-transparent: #A6A6A6;
 
 //Link decoration
 $link-decoration: none;
@@ -41,7 +42,7 @@ $font-secondary: "Inter", sans-serif;
 $font-size-base: 1rem;
 
 $font-sizes: (
-  08: $font-size-base * .5, //8px
+  8: $font-size-base * .5, //8px
   10: $font-size-base * .625, //10px
   12: $font-size-base * .75, //12px
   14: $font-size-base * .875, //14px
