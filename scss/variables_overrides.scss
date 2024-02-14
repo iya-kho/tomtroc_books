@@ -30,7 +30,8 @@ $spacers: (
   85: $spacer * 8.5,
   90: $spacer * 9,
   95: $spacer * 9.5,
-  100: $spacer * 10
+  100: $spacer * 10,
+  115: $spacer * 11.5
 );
 
 //Fonts and Typography
@@ -48,6 +49,8 @@ $font-sizes: (
   20: $font-size-base * 1.25, //20px
 );
 
+$h1-font-size: 30px;
+
 //Navigation toggler styles
 $navbar-toggler-focus-width: 1px;
 
@@ -57,6 +60,6 @@ $container-max-widths: (
   md: 720px,
   lg: 960px,
   xl: 1100px,
-  xxl: 1320px
+  xxl: 1230px
 );
 

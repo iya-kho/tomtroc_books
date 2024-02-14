@@ -8,6 +8,13 @@
   font-family: $font-secondary;
 }
 
+h1 {
+  font-size: 30px;
+  @include desktop {
+    font-size: 36px;
+  }  
+}
+
 //Header
 
 header {
@@ -48,6 +55,33 @@ header {
     width: auto;
   }
 
+}
+
+//All books 
+
+.books-container {
+  @include desktop {
+    border-top: solid 1px #000;
+  }
+}
+
+.search {    
+  height: 50px;
+  svg {
+    width: 18px;
+    height: auto;
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+  }
+  input::placeholder {
+    color: #A6A6A6;
+  }
+  @include desktop {
+    width: 322px;
+  }
 }
 
 //Footer
