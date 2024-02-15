@@ -4,16 +4,21 @@
     <div class="container books-container bg-light pt-15 px-lg-115">
         <div class="d-flex flex-column flex-lg-row mb-35 mb-lg-70 justify-content-between">
             <h1 class="font-primary">Nos livres à l'échange</h1>
-            <div class="input-group rounded search position-relative mt-35 mt-lg-0">
+            <form 
+                class="input-group rounded search position-relative mt-35 mt-lg-0"
+                action="index.php?action=books"
+                method="post"
+                >
                 <?php include('img/icons/search.svg')?>
                 <input 
                     type="search" 
+                    name="search"
                     class="form-control rounded ps-40" 
                     placeholder="Rechercher un livre" 
                     aria-label="Search" 
                     aria-describedby="search-addon" 
                     />
-            </div>
+            </form>
         </div>
         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-15 gx-lg-40 gy-lg-45">
             <?php foreach ($books as $book) { ?>

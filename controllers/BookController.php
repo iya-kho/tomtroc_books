@@ -3,13 +3,22 @@
 class BookController
 {
     /**
-     * Show all books
+     * Show all books or perform a search
      * @return void
      */
     public function showAllBooks() : void
     {
         $bookManager = new BookManager();
-        $books = $bookManager->getAllBooks();
+
+        //If the user has searched for a book in the search bar, we display the results
+        //Otherwise, we display all the books
+        if (isset($_POST['search']) && strlen($_POST['search']) >= 3) {
+            $query = htmlspecialchars($_POST['search']);
+            $result = $bookManager->searchBooks($query);
+            $books = $result ?? $bookManager->getAllBooks();
+        } else {
+            $books = $bookManager->getAllBooks();
+        }
 
         $view = new View("Books");
         $view->render("books", ['books' => $books]);
@@ -34,14 +43,4 @@ class BookController
         $view = new View($book->getTitle());
         $view->render("book", ['book' => $book]);
     }
-
-    // /**
-    //  * Show the form to add a book
-    //  * @return void
-    //  */
-    // public function addBook() : void
-    // {
-    //     $view = new View("Add a book");
-    //     $view->render("addBook");
-    // }
 }

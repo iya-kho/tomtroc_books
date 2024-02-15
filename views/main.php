@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>TomTroc Books</title>
+    <title><?= $title ?></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/style.css" />
@@ -27,27 +27,53 @@
           <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
             <ul class="nav navbar-nav">
               <li class="nav-item me-20 me-xl-40">
-                <a class="nav-link fs-14 font-secondary"href="index.php?action=home">Accueil</a>
+                <a 
+                  class="<?= Utils::request('action', 'home') === 'home' ?
+                    'nav-link fs-14 font-secondary active' :
+                    'nav-link fs-14 font-secondary' ?>" 
+                  href="index.php?action=home">
+                  Accueil
+                </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link fs-14 font-secondary" href="index.php?action=books">Nos livres à l'échange</a>
+                <a 
+                  class="<?= Utils::request('action') === 'books' ?
+                    'nav-link fs-14 font-secondary active' :
+                    'nav-link fs-14 font-secondary' ?>" 
+                  href="index.php?action=books">
+                  Nos livres à l'échange
+                </a>
               </li>
             </ul>
             <ul class="nav navbar-nav border-start">
               <li class="nav-item ms-25 ms-xl-55">
-                <a class="nav-link fs-14 font-secondary d-flex align-items-center" href="index.php?action=messenger">
+                <a 
+                  class="<?= Utils::request('action') === 'messenger' ?
+                    'nav-link fs-14 font-secondary d-flex align-items-center active' :
+                    'nav-link fs-14 font-secondary d-flex align-items-center' ?>" 
+                  href="index.php?action=messenger">
                   <?php include('img/icons/messenger.svg') ?>
                   <span class="ms-5">Messagerie</span>
                 </a>
               </li>
               <li class="nav-item ms-25 ms-xl-55">
-                <a class="nav-link fs-14 font-secondary d-flex align-items-center" href="index.php?action=account">
+                <a 
+                  class="<?= Utils::request('action') === 'account' ?
+                    'nav-link fs-14 font-secondary d-flex align-items-center active' :
+                    'nav-link fs-14 font-secondary d-flex align-items-center' ?>" 
+                  href="index.php?action=account">
                   <?php include('img/icons/account.svg') ?>
                   <span class="ms-5">Mon compte</span>
                 </a>
               </li>
               <li class="nav-item ms-25 ms-xl-55">
-                <a class="nav-link fs-14 font-secondary" href="index.php?action=login">Connexion</a>
+                <a 
+                  class="<?= Utils::request('action') === 'login' ?
+                    'nav-link fs-14 font-secondary d-flex align-items-center active' :
+                    'nav-link fs-14 font-secondary d-flex align-items-center' ?>" 
+                  href="index.php?action=login">
+                  Connexion
+                </a>
               </li>
             </ul>  
           </div>
