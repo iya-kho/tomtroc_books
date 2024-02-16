@@ -12,6 +12,17 @@
   color: $text-transparent;
 }
 
+.fw-semibold {
+  font-weight: 500 !important;
+}
+
+.h-100 {
+  min-height: calc(100vh - #{$header-height-mobile} - #{$footer-height-mobile});
+  @include desktop {
+    min-height: calc(100vh - #{$header-height-desktop} - #{$footer-height-desktop});
+  }
+}
+
 h1 {
   font-size: 30px;
   @include desktop {
@@ -26,6 +37,10 @@ h1 {
 //Header
 
 header {
+  min-height: $header-height-mobile;
+  @include desktop {
+    min-height: $header-height-desktop;
+  }
   .navbar-brand .fs-10 {
     @include desktop {
       font-size: 20px !important;
@@ -63,14 +78,18 @@ header {
     width: auto;
   }
 
+  .collapsing, .show {
+    ul {
+      border-left: none !important;
+    }
+    li {
+      margin-left: 0 !important;
+    }
+  }
 }
 
 //All books 
-
-.books-container {
-  @include desktop {
-    border-top: solid 1px #000;
-  }
+#all-books {
   .search {    
     height: 50px;
     svg {
@@ -90,18 +109,18 @@ header {
     }
   }
 
-  .card-title {
-    @include mobile-m {
-      font-size: 14px !important;
-    }
+  .books-container {
     @include desktop {
-      font-size: 16px !important;
+      border-top: solid 1px #000;
     }
   }
 
   .card-title {
-    @include desktop {
+    @include mobile-m {
       font-size: 14px !important;
+    }
+    @include desktop-xl {
+      font-size: 16px !important;
     }
   }
 
@@ -119,8 +138,37 @@ header {
   }
 }
 
+//Book details
+#book-details {
+  .book-pic img {
+    @include desktop {
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  hr {
+    width: 27px;
+  }
+
+  .userinfo {
+    border-radius: 25px;
+    width: fit-content;
+
+  }
+
+  .userpic {
+    height: 50px;
+    width: 50px;
+  }
+}
+
 //Footer
 footer {
+  height: $footer-height-mobile;
+  @include desktop {
+    height: $footer-height-desktop;
+  }
   .logo svg path {
     fill: $primary;
   }

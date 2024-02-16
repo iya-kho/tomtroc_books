@@ -10,11 +10,46 @@
     private string $title = '';
     private string $author = '';
     private int $userId;
-    private string $username = '';
     private string $imageUrl = '';
     private string $description = '';
     private bool $availability = false;
     private ?DateTime $dateCreation = null;
+    private User $user;
+
+    /**
+     * Redefine constructor to add the search of the user in the database.
+     */
+    public function __construct(array $data = []) 
+    {
+        if (!empty($data)) {
+            $this->hydrate($data);
+        }
+
+        $this->user = $this->findUser();
+    }
+
+    /**
+     * Find the user who owns the book
+     */
+    public function findUser() : User
+    {
+        $userManager = new UserManager();
+        $user = $userManager->getUserById($this->userId);
+
+        return $user;
+    }
+
+    //Getter for the username
+    public function getUsername() : string
+    {
+        return $this->user->getUsername();
+    }
+
+    //Getter for the user image url
+    public function getUserImageUrl() : string
+    {
+        return $this->user->getImageUrl();
+    }
 
     /**
      * Setter for the title.
@@ -68,24 +103,6 @@
     public function getUserId() : int
     {
         return $this->userId;
-    }
-
-    /**
-     * Setter for the username.
-     * @param string $username
-     */
-    public function setUsername(string $username) : void
-    {
-        $this->username = $username;
-    }
-
-    /**
-     * Getter for the username.
-     * @return string
-     */
-    public function getUsername() : string
-    {
-        return $this->username;
     }
 
     /**
@@ -148,12 +165,9 @@
     //  * @param string $format : the format for the date conversion if it's a string.
     //  * By default, it's the mysql date format that is used.
     //  */ 
-    public function setDateCreation(string|DateTime $dateCreation, string $format = 'Y-m-d') : void 
+    public function setDateCreation(string|DateTime $dateCreation) : void 
     {
-        if (is_string($dateCreation)) {
-            $dateCreation = DateTime::createFromFormat($format, $dateCreation);
-        }
-        $this->dateCreation = $dateCreation;
+        $this->dateCreation = Utils::stringToDate($dateCreation);
     }
     
     /**
@@ -165,4 +179,5 @@
     {
         return $this->dateCreation;
     }
+
  }

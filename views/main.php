@@ -12,8 +12,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
   </head>
   <body>
-    <header class="container-fluid bg-dark">
-      <nav class="navbar navbar-expand-lg py-15">
+    <header class="container-fluid bg-dark d-flex">
+      <nav class="navbar navbar-expand-lg w-100">
         <div class="container">
           <a class="navbar-brand d-flex align-items-center me-40 me-xl-80" href="index.php">
             <div class="bg-primary logo d-flex justify-content-center align-items-center rounded me-10"> 

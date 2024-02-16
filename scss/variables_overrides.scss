@@ -32,7 +32,8 @@ $spacers: (
   90: $spacer * 9,
   95: $spacer * 9.5,
   100: $spacer * 10,
-  115: $spacer * 11.5
+  115: $spacer * 11.5,
+  150: $spacer * 15,
 );
 
 //Fonts and Typography
@@ -63,4 +64,10 @@ $container-max-widths: (
   xl: 1100px,
   xxl: 1230px
 );
+
+//Header and footer heights
+$header-height-mobile: 56px;
+$header-height-desktop: 80px;
+$footer-height-mobile: 185px;
+$footer-height-desktop: 60px;
 

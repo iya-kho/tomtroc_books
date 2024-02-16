@@ -9,4 +9,13 @@ class Utils {
     return $_REQUEST[$variableName] ?? $defaultValue;
 
   }
+
+  //Method to transform a string into a DateTime object
+  public static function stringToDate(string|DateTime $date, string $format = 'Y-m-d') : DateTime 
+  {
+    if (is_string($date)) {
+        $date = DateTime::createFromFormat($format, $date);
+    }
+    return $date;
+  }
 }

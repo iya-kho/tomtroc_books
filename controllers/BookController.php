@@ -14,8 +14,7 @@ class BookController
         //Otherwise, we display all the books
         if (isset($_POST['search']) && strlen($_POST['search']) >= 3) {
             $query = htmlspecialchars($_POST['search']);
-            $result = $bookManager->searchBooks($query);
-            $books = $result ?? $bookManager->getAllBooks();
+            $books = $bookManager->searchBooks($query);
         } else {
             $books = $bookManager->getAllBooks();
         }
@@ -33,6 +32,7 @@ class BookController
         // Get the id of the requested book
         $id = Utils::request("id", -1);
 
+        //Find the requested book
         $bookManager = new BookManager();
         $book = $bookManager->getBookById($id);
         
@@ -40,6 +40,7 @@ class BookController
             throw new Exception("The requested book does not exist.");
         }
 
+        //Render the view
         $view = new View($book->getTitle());
         $view->render("book", ['book' => $book]);
     }
