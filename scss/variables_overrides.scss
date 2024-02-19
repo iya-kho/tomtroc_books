@@ -34,6 +34,7 @@ $spacers: (
   100: $spacer * 10,
   115: $spacer * 11.5,
   150: $spacer * 15,
+  200: $spacer * 20,
 );
 
 //Fonts and Typography
@@ -49,6 +50,9 @@ $font-sizes: (
   14: $font-size-base * .875, //14px
   16: $font-size-base, //16px
   20: $font-size-base * 1.25, //20px
+  28: $font-size-base * 1.75, //28px
+  30: $font-size-base * 1.875, //30px
+  32: $font-size-base * 2, //32px
 );
 
 $h1-font-size: 30px;

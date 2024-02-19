@@ -23,6 +23,36 @@
   }
 }
 
+.w-lg-100 {
+  @include desktop {
+    width: 100% !important;
+  }
+}
+
+.w-lg-75 {
+  @include desktop {
+    width: 75% !important;
+  }
+}
+
+.w-lg-50 {
+  @include desktop {
+    width: 50% !important;
+  }
+}
+
+.w-lg-40 {
+  @include desktop {
+    width: 40% !important;
+  }
+}
+
+.w-lg-25 {
+  @include desktop {
+    width: 25% !important;
+  }
+}
+
 h1 {
   font-size: 30px;
   @include desktop {
@@ -88,8 +118,34 @@ header {
   }
 }
 
+//Books table
+
+.books-table {
+  .card-title {
+    @include mobile-m {
+      font-size: 14px !important;
+    }
+    @include desktop-xl {
+      font-size: 16px !important;
+    }
+  }
+
+  .card-text {
+    @include desktop {
+      font-size: 10px !important;
+    }
+  }
+
+  .availability {
+    top: 15px;
+    right: 12px;
+    background-color: #C56D6D;
+    border-radius: 30px;
+  }
+}
+
 //All books 
-#all-books {
+#all-books, #homepage {
   .search {    
     height: 50px;
     svg {
@@ -113,28 +169,6 @@ header {
     @include desktop {
       border-top: solid 1px #000;
     }
-  }
-
-  .card-title {
-    @include mobile-m {
-      font-size: 14px !important;
-    }
-    @include desktop-xl {
-      font-size: 16px !important;
-    }
-  }
-
-  .card-text {
-    @include desktop {
-      font-size: 10px !important;
-    }
-  }
-
-  .availability {
-    top: 15px;
-    right: 12px;
-    background-color: #C56D6D;
-    border-radius: 30px;
   }
 }
 
@@ -161,6 +195,69 @@ header {
     height: 50px;
     width: 50px;
   }
+}
+
+//Home page
+#homepage{
+  h2 {
+    width: fit-content;
+    @include desktop {
+      font-size: 32px !important;
+    }
+  }
+
+  .first-screen {
+    @include desktop {
+      max-width: 880px;
+    }
+    img {
+      @include desktop {
+        height: 540px;
+        object-fit: cover
+      }
+    }
+  }
+
+  .instructions .card {
+    height: 140px;
+  }
+
+  .description {
+    @include desktop {
+      font-size: 16px !important;
+    }
+  }
+
+  .card-text {
+    font-size: 14px !important;
+  }
+
+  .icon-heart {
+    width: fit-content;
+    @include desktop {
+      position: absolute;
+      right: -60px;
+      bottom: -70px;
+    }
+  }
+
+  .values img {
+    @include desktop {
+      height: 230px;
+    }
+  }
+
+  .values p {
+    @include desktop {
+      font-size: 16px !important;
+    }
+
+    &:last-of-type {
+      font-size: 12px !important;
+    }
+  
+  }
+
 }
 
 //Footer

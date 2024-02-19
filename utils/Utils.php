@@ -18,4 +18,19 @@ class Utils {
     }
     return $date;
   }
+
+  //Format a string into paragraphs
+  public static function format(string $string) : string
+  {
+    $lines = explode("\n", $string);
+
+    $finalString = "";
+    foreach ($lines as $line) {
+        if (trim($line) != "") {
+            $finalString .= "<p>$line</p>";
+        }
+    }
+    
+    return $finalString;
+  }
 }

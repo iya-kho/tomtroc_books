@@ -46,4 +46,21 @@ class BookManager extends AbstractEntityManager
     $book = $result->fetch();
     return $book ? new Book($book) : null;
   }
+
+  /**
+   * Get the last books added to the library.
+   * @param int $limit : the number of books to get.
+   * @return array : an array of Book objects.r
+   */
+  public function getLastBooks() : array
+  {
+    $sql = "SELECT * FROM books ORDER BY date_creation DESC LIMIT 4";
+    $result = $this->db->query($sql);
+    $books = [];
+
+    while ($book = $result->fetch()) {
+      $books[] = new Book($book);
+    }
+    return $books;
+  }
 }

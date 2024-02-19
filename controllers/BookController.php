@@ -3,6 +3,20 @@
 class BookController
 {
     /**
+     * Show the home page
+     * @return void
+     */
+    public function showHome() : void
+    {
+        //Show the last books added to the library
+        $bookManager = new BookManager();
+        $books = $bookManager->getLastBooks();
+        
+        $view = new View("Home");
+        $view->render("home", ['books' => $books]);
+    }
+    
+    /**
      * Show all books or perform a search
      * @return void
      */
