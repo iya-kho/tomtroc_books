@@ -10,6 +10,69 @@
     private string $userneme = '';
     private string $imageUrl = '';
     private ?DateTime $dateSignup = null;
+    private array $books = [];    
+
+    //Get information about the books owned by the user.
+    public function getBooks() : array
+    {   
+        if (empty($this->books)) {
+            $this->setBooks();
+        }
+
+        return $this->books;
+    }
+
+    //Set the books owned by the user.
+    private function setBooks() : void
+    {
+        $bookManager = new BookManager();
+        $books = $bookManager->getBooksByUserId($this->id);
+
+        $this->books = $books;
+    }
+
+    //Calculate the number of books owned by the user.
+    public function getBooksCount() : string
+    {
+        $count = count($this->getBooks());
+
+        switch ($count) {
+            case 0:
+                $result = 'Aucun livre';
+                break;
+            case 1:
+                $result = '1 livre';
+                break;
+            default:
+                $result = $count . ' livres';
+        }
+
+        return $result;
+    }
+
+    //Calculate the period of time since the user signed up.
+    public function getSignupDuration() : string
+    {
+        $now = new DateTime();
+        $interval = $now->diff($this->dateSignup);
+
+        switch ($interval->y) {
+            case 0:
+                if ($interval->m === 0) {
+                    $result = $interval->format('%d jours');
+                } else {
+                    $result = $interval->format('%m mois');
+                }
+                break;
+            case 1:
+                $result = $interval->format('%y an');
+                break;
+            default:
+                $result = $interval->format('%y ans');
+        }
+
+        return $result;
+    }
 
     //Setter for the username.
     public function setUsername(string $username) : void

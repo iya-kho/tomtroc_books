@@ -12,10 +12,6 @@
   color: $text-transparent;
 }
 
-.fw-semibold {
-  font-weight: 500 !important;
-}
-
 .h-100 {
   min-height: calc(100vh - #{$header-height-mobile} - #{$footer-height-mobile});
   @include desktop {
@@ -62,6 +58,11 @@ h1 {
 
 .active {
   font-weight: 500;
+}
+
+hr {
+  color: $dark;
+  opacity: 1;
 }
 
 //Header
@@ -118,9 +119,80 @@ header {
   }
 }
 
+//Home page
+#homepage{
+  h2 {
+    width: fit-content;
+    @include desktop {
+      font-size: 32px !important;
+    }
+  }
+
+  .first-screen {
+    @include desktop {
+      max-width: 880px;
+    }
+    img {
+      @include desktop {
+        height: 540px;
+        object-fit: cover
+      }
+    }
+  }
+
+  .instructions .card {
+    height: 140px;
+  }
+
+  .description {
+    @include desktop {
+      font-size: 16px !important;
+    }
+  }
+
+  .card-text {
+    font-size: 14px !important;
+  }
+
+  .icon-heart {
+    width: fit-content;
+    @include desktop {
+      position: absolute;
+      right: -60px;
+      bottom: -70px;
+    }
+  }
+
+  .values img {
+    @include desktop {
+      height: 230px;
+    }
+  }
+
+  .values p {
+    @include desktop {
+      font-size: 16px !important;
+    }
+
+    &:last-of-type {
+      font-size: 12px !important;
+    }
+  
+  }
+
+}
+
 //Books table
 
 .books-table {
+  .card {
+    border-radius: 0 0 20px 20px !important;
+  }
+
+  .card-img-top {
+    border-radius: 0 !important;
+  }
+  
   .card-title {
     @include mobile-m {
       font-size: 14px !important;
@@ -197,67 +269,37 @@ header {
   }
 }
 
-//Home page
-#homepage{
-  h2 {
-    width: fit-content;
-    @include desktop {
-      font-size: 32px !important;
-    }
+//Profile
+#profile {
+  .rounded {
+    border-radius: 20px!important;
   }
 
-  .first-screen {
+  .userinfo {
+    img {
+      height: 135px;
+      width: 135px;
+      object-fit: cover;
+   }
+  }
+
+  .book-info {
+    height: 250px;
     @include desktop {
-      max-width: 880px;
+      height: auto;
     }
     img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+    }
+    &:last-of-type {
       @include desktop {
-        height: 540px;
-        object-fit: cover
+        border-bottom-left-radius: inherit;
+        border-bottom-right-radius: inherit;
       }
     }
   }
-
-  .instructions .card {
-    height: 140px;
-  }
-
-  .description {
-    @include desktop {
-      font-size: 16px !important;
-    }
-  }
-
-  .card-text {
-    font-size: 14px !important;
-  }
-
-  .icon-heart {
-    width: fit-content;
-    @include desktop {
-      position: absolute;
-      right: -60px;
-      bottom: -70px;
-    }
-  }
-
-  .values img {
-    @include desktop {
-      height: 230px;
-    }
-  }
-
-  .values p {
-    @include desktop {
-      font-size: 16px !important;
-    }
-
-    &:last-of-type {
-      font-size: 12px !important;
-    }
-  
-  }
-
 }
 
 //Footer

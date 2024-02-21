@@ -14,43 +14,31 @@
     private string $description = '';
     private bool $availability = false;
     private ?DateTime $dateCreation = null;
-    private User $user;
+    private ?User $user = null;
 
     /**
-     * Redefine constructor to add the search of the user in the database.
+     * Get information about the user who owns the book.
      */
-    public function __construct(array $data = []) 
+    public function getUser() : User
     {
-        if (!empty($data)) {
-            $this->hydrate($data);
+        if (!$this->user) {
+            $this->setUser();
         }
 
-        $this->user = $this->findUser();
+        return $this->user;
     }
 
     /**
-     * Find the user who owns the book
+     * Set the user who owns the book.
      */
-    public function findUser() : User
+    private function setUser() : void
     {
         $userManager = new UserManager();
         $user = $userManager->getUserById($this->userId);
 
-        return $user;
+        $this->user = $user;
     }
-
-    //Getter for the username
-    public function getUsername() : string
-    {
-        return $this->user->getUsername();
-    }
-
-    //Getter for the user image url
-    public function getUserImageUrl() : string
-    {
-        return $this->user->getImageUrl();
-    }
-
+  
     /**
      * Setter for the title.
      * @param string $title
@@ -134,10 +122,19 @@
 
     /**
      * Getter for the description.
+     * @param int $length : the length of the description. By default, we return the full description.
+     * If the length was passed, we return the description with a maximum length of $length.
      * @return string
      */
-    public function getDescription() : string
+    public function getDescription(int $length = -1) : string 
     {
+        if ($length > 0) {
+            $description = mb_substr($this->description, 0, $length);
+            if (strlen($this->description) > $length) {
+                $description .= "...";
+            }
+            return $description;
+        }
         return $this->description;
     }
 

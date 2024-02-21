@@ -24,6 +24,10 @@ try {
           $bookController = new BookController();
           $bookController->showOneBook();
           break;
+        case 'profile':
+          $userController = new UserController();
+          $userController->showProfile();
+          break;
         default:
           throw new Exception("The requested page does not exist.");
     }

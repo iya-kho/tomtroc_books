@@ -1,7 +1,14 @@
 <?php
 
 class BookController
-{
+{   
+    private BookManager $bookManager;
+
+    public function __construct()
+    {
+        $this->bookManager = new BookManager();
+    }
+
     /**
      * Show the home page
      * @return void
@@ -9,8 +16,7 @@ class BookController
     public function showHome() : void
     {
         //Show the last books added to the library
-        $bookManager = new BookManager();
-        $books = $bookManager->getLastBooks();
+        $books = $this->bookManager->getLastBooks();
         
         $view = new View("Home");
         $view->render("home", ['books' => $books]);
@@ -22,15 +28,13 @@ class BookController
      */
     public function showAllBooks() : void
     {
-        $bookManager = new BookManager();
-
         //If the user has searched for a book in the search bar, we display the results
         //Otherwise, we display all the books
         if (isset($_POST['search']) && strlen($_POST['search']) >= 3) {
             $query = htmlspecialchars($_POST['search']);
-            $books = $bookManager->searchBooks($query);
+            $books = $this->bookManager->searchBooks($query);
         } else {
-            $books = $bookManager->getAllBooks();
+            $books = $this->bookManager->getAllBooks();
         }
 
         $view = new View("Books");
@@ -47,8 +51,7 @@ class BookController
         $id = Utils::request("id", -1);
 
         //Find the requested book
-        $bookManager = new BookManager();
-        $book = $bookManager->getBookById($id);
+        $book = $this->bookManager->getBookById($id);
         
         if (!$book) {
             throw new Exception("The requested book does not exist.");

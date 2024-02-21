@@ -2,6 +2,7 @@
 $primary: #00AC66;
 $light: #FAF9F7;
 $dark: #F5F3EF;
+$info: #EDF2F6;
 $text-transparent: #A6A6A6;
 
 //Link decoration
@@ -50,6 +51,7 @@ $font-sizes: (
   14: $font-size-base * .875, //14px
   16: $font-size-base, //16px
   20: $font-size-base * 1.25, //20px
+  24: $font-size-base * 1.5, //24px
   28: $font-size-base * 1.75, //28px
   30: $font-size-base * 1.875, //30px
   32: $font-size-base * 2, //32px
