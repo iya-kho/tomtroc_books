@@ -19,6 +19,15 @@ class Utils {
     return $date;
   }
 
+  //Method to transform a DateTime object into a string
+  public static function dateToString(DateTime|string $date, string $format = 'Y-m-d') : string
+  {
+    if ($date instanceof DateTime) {
+        return $date->format($format);
+    }
+    return $date;
+  }
+
   //Format a string into paragraphs
   public static function format(string $string) : string
   {
@@ -40,6 +49,18 @@ class Utils {
     $url = "index.php?action=$action";
     header("Location: $url");
     exit;
+  }
+
+  //Check if an array contains empty values
+  public static function isEmpty($data) 
+  {
+  foreach ($data as $key => $value) {
+    if (empty($value) || trim($value) == '') {
+      return true;
+    }
+  }
+
+  return false;
   }
 
 }

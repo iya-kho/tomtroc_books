@@ -34,7 +34,7 @@
     private function setUser() : void
     {
         $userManager = new UserManager();
-        $user = $userManager->getUserById($this->userId);
+        $user = $userManager->findUser('id', $this->userId);
 
         $this->user = $user;
     }

@@ -19684,7 +19684,7 @@ header .collapsing li, header .show li {
 }
 
 .login-page form {
-  width: 325px;
+  max-width: 325px;
 }
 .login-page input {
   height: 50px;

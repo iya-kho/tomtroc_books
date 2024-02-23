@@ -2,9 +2,15 @@
 
 <div class="container-fluid bg-light h-100 d-flex flex-column flex-lg-row login-page">
   <div class="w-lg-50 pt-80 pt-lg-130 pb-100 px-lg-150">
-    <h1 class="font-primary mb-35 mb-lg-65"><?= Utils::request('action') === 'login'? 'Connexion' : 'Inscription' ?></h1>
-    <form action="index.php?action=<?= Utils::request('action') === 'login'? 'connectUser' : 'registerUser' ?>" method="post">
-      <?php if (Utils::request('action') === 'signup') { ?>
+    <h1 class="font-primary mb-35 mb-lg-65"><?= $action === 'login'? 'Connexion' : 'Inscription' ?></h1>
+    <div>
+      <?php foreach ($messages as $message) { ?>
+          <p class="text-<?= $messageColor ?> font-secondary fs-12"><?= $message ?></p>
+      <?php } ?>
+    </div>
+    <form action="index.php?action=<?= $action ?>" method="post">
+      <input type="hidden" name="action" value="<?= $action ?>" />
+      <?php if ($action === 'signup') { ?>
         <div class="mb-30 mb-lg-35">
           <label for="username" class="form-label font-secondary fs-14 text-transparent">Pseudo</label>
           <input type="text" name="username" id="username" required class="form-control">
@@ -19,11 +25,11 @@
         <input type="password" name="password" id="password" required class="form-control">
       </div>
       <button type="submit" class="btn btn-primary text-light w-100 my-30 py-15 mb-lg-40 font-secondary fs-16 fw-semibold">
-        <?= Utils::request('action') === 'login'? 'Se connecter' : 'S\'inscrire' ?>
+        <?= $action === 'login'? 'Se connecter' : 'S\'inscrire' ?>
       </button>
     </form>
     <div class="font-secondary fs-16">
-    <?php if (Utils::request('action') === 'login') { ?> 
+    <?php if ($action === 'login') { ?> 
       <span>Pas de compte? </span>
       <a href="index.php?action=signup" class="text-decoration-underline">Inscrivez-vous</a>
     <?php } else { ?>

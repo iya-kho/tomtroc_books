@@ -8,6 +8,8 @@
  class User extends AbstractEntity 
  {
     private string $userneme = '';
+    private string $email = '';
+    private string $password = '';
     private string $imageUrl = '';
     private ?DateTime $dateSignup = null;
     private array $books = [];    
@@ -84,6 +86,30 @@
     public function getUsername() : string
     {
         return $this->username;
+    }
+
+    //Setter for the email.
+    public function setEmail(string $email) : void
+    {
+        $this->email = $email;
+    }
+
+    //Getter for the email.
+    public function getEmail() : string
+    {
+        return $this->email;
+    }
+
+    //Setter for the password.
+    public function setPassword(string $password) : void
+    {
+        $this->password = $password;
+    }
+
+    //Getter for the password.
+    public function getPassword() : string
+    {
+        return $this->password;
     }
 
     //Setter for the image url.

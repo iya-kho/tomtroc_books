@@ -25,16 +25,12 @@ try {
           $bookController->showOneBook();
           break;
         case 'profile':
-          $userController = new AdminController();
-          $userController->showProfile();
+          $adminController = new AdminController();
+          $adminController->showProfile();
           break;
-        case 'login':
-          $userController = new AdminController();
-          $userController->showLogin();
-          break;
-        case 'signup':
-          $userController = new AdminController();
-          $userController->showSignup();
+        case 'login' || 'signup':
+          $adminController = new AdminController();
+          $adminController->showLoginSignup();
           break;
         default:
           throw new Exception("The requested page does not exist.");
