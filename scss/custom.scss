@@ -302,6 +302,16 @@ header {
   }
 }
 
+//Login/Signup page
+.login-page {
+  form {
+    width: 325px;
+  }
+  input {
+    height: 50px;
+  }
+}
+
 //Footer
 footer {
   height: $footer-height-mobile;

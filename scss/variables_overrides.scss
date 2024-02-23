@@ -5,6 +5,9 @@ $dark: #F5F3EF;
 $info: #EDF2F6;
 $text-transparent: #A6A6A6;
 
+//Border
+$border-color: #F0F0F0;
+
 //Link decoration
 $link-decoration: none;
 $link-color: #000;
@@ -34,6 +37,7 @@ $spacers: (
   95: $spacer * 9.5,
   100: $spacer * 10,
   115: $spacer * 11.5,
+  130: $spacer * 13,
   150: $spacer * 15,
   200: $spacer * 20,
 );

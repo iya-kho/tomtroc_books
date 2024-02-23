@@ -46,6 +46,7 @@
               </li>
             </ul>
             <ul class="nav navbar-nav border-start">
+              <?php if (isset($_SESSION['user'])) { ?>
               <li class="nav-item ms-25 ms-xl-55">
                 <a 
                   class="<?= Utils::request('action') === 'messenger' ?
@@ -65,14 +66,15 @@
                   <?php include('img/icons/account.svg') ?>
                   <span class="ms-5">Mon compte</span>
                 </a>
-              </li>
+              </li> 
+              <?php } ?>
               <li class="nav-item ms-25 ms-xl-55">
                 <a 
                   class="<?= Utils::request('action') === 'login' ?
                     'nav-link fs-14 font-secondary d-flex align-items-center active' :
                     'nav-link fs-14 font-secondary d-flex align-items-center' ?>" 
                   href="index.php?action=login">
-                  Connexion
+                  <?= isset($_SESSION['user']) ? "Déconnexion" : "Connexion" ?>
                 </a>
               </li>
             </ul>  

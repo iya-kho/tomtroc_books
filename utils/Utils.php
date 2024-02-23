@@ -33,4 +33,13 @@ class Utils {
     
     return $finalString;
   }
+
+  //Redirect to another page
+  public static function redirect(string $action) : void
+  {
+    $url = "index.php?action=$action";
+    header("Location: $url");
+    exit;
+  }
+
 }

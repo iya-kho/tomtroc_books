@@ -25,8 +25,16 @@ try {
           $bookController->showOneBook();
           break;
         case 'profile':
-          $userController = new UserController();
+          $userController = new AdminController();
           $userController->showProfile();
+          break;
+        case 'login':
+          $userController = new AdminController();
+          $userController->showLogin();
+          break;
+        case 'signup':
+          $userController = new AdminController();
+          $userController->showSignup();
           break;
         default:
           throw new Exception("The requested page does not exist.");
