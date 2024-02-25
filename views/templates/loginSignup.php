@@ -9,7 +9,6 @@
       <?php } ?>
     </div>
     <form action="index.php?action=<?= $action ?>" method="post">
-      <input type="hidden" name="action" value="<?= $action ?>" />
       <?php if ($action === 'signup') { ?>
         <div class="mb-30 mb-lg-35">
           <label for="username" class="form-label font-secondary fs-14 text-transparent">Pseudo</label>

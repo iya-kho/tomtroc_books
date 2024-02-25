@@ -12,7 +12,7 @@ class AdminController
   public function showProfile()
   {
     //Get the user id from the URL
-    $userId = Utils::request('id');
+    $userId = Utils::request('id', -1);
 
     //Find the user by id
     $user = $this->userManager->findUser('id', $userId) ?? null;
@@ -29,8 +29,8 @@ class AdminController
   public function showLoginSignup()
   {
     //If the user is already connected, log them out and redirect to the home page
-    if (isset($_SESSION['user'])) {
-      unset($_SESSION['user']);
+    if (isset($_SESSION['userId'])) {
+      unset($_SESSION['userId']);
       Utils::redirect("home");
     }
 
@@ -38,8 +38,8 @@ class AdminController
     $messageColor = 'danger';
     $messages = [];
 
-    //If the form has been submitted and the action is signup, process the signup.
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'signup') {
+    //If the form has been submitted and the action is signup, process the signup
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && $action == 'signup') {
       list($isValid, $errors) = $this->processSignup();
       
       //If the form is valid, redirect to the login page
@@ -57,8 +57,60 @@ class AdminController
 
     }
 
+    //If the form has been submitted and the action is login, process the login
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && $action == 'login') {
+      list($isValid, $errors) = $this->processLogin();
+      
+      //If the form is valid, redirect to the home page
+      if ($isValid) {
+        Utils::redirect("home");
+      }
+
+      //If the form is not valid, show the login page with the errors
+      if (!$isValid) {
+        $messages = $errors;
+      }
+    }
+
     $view = new View("Login");
     $view->render("loginSignup", ['action' => $action, 'messageColor' => $messageColor, 'messages' => $messages]);
+  }
+
+  private function processLogin()
+  {
+    $isValid = true;
+    $errors = [];
+
+    //Check if all fields are filled
+    if (Utils::isEmpty($_POST)) {
+      $isValid = false;
+      $errors[] = "All fields are required.";
+    }
+
+    $email = htmlspecialchars($_POST['email']);
+    $password = htmlspecialchars($_POST['password']);
+
+    //Find the user by email
+    $user = $this->userManager->findUser('email', $email);
+
+    //If the user does not exist, return an error
+    if (!$user) {
+      $isValid = false;
+      $errors[] = "The email or password is incorrect.";
+      return [$isValid, $errors];
+    }
+
+    //If the user exists, check if the password is correct
+    if (!password_verify($password, $user->getPassword())) {
+      $isValid = false;
+      $errors[] = "The email or password is incorrect.";
+      return [$isValid, $errors];
+    }
+
+    //If the form is valid, log the user in   
+    $_SESSION['userId'] = $user->getId();
+
+    return [$isValid, $errors];
   }
 
   private function processSignup() 

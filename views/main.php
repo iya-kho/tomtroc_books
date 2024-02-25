@@ -46,27 +46,27 @@
               </li>
             </ul>
             <ul class="nav navbar-nav border-start">
-              <?php if (isset($_SESSION['user'])) { ?>
-              <li class="nav-item ms-25 ms-xl-55">
-                <a 
-                  class="<?= Utils::request('action') === 'messenger' ?
-                    'nav-link fs-14 font-secondary d-flex align-items-center active' :
-                    'nav-link fs-14 font-secondary d-flex align-items-center' ?>" 
-                  href="index.php?action=messenger">
-                  <?php include('img/icons/messenger.svg') ?>
-                  <span class="ms-5">Messagerie</span>
-                </a>
-              </li>
-              <li class="nav-item ms-25 ms-xl-55">
-                <a 
-                  class="<?= Utils::request('action') === 'account' ?
-                    'nav-link fs-14 font-secondary d-flex align-items-center active' :
-                    'nav-link fs-14 font-secondary d-flex align-items-center' ?>" 
-                  href="index.php?action=account">
-                  <?php include('img/icons/account.svg') ?>
-                  <span class="ms-5">Mon compte</span>
-                </a>
-              </li> 
+              <?php if (isset($_SESSION['userId'])) { ?>
+                <li class="nav-item ms-25 ms-xl-55">
+                  <a 
+                    class="<?= Utils::request('action') === 'messenger' ?
+                      'nav-link fs-14 font-secondary d-flex align-items-center active' :
+                      'nav-link fs-14 font-secondary d-flex align-items-center' ?>" 
+                    href="index.php?action=messenger">
+                    <?php include('img/icons/messenger.svg') ?>
+                    <span class="ms-5">Messagerie</span>
+                  </a>
+                </li>
+                <li class="nav-item ms-25 ms-xl-55">
+                  <a 
+                    class="<?= Utils::request('action') === 'profile' ?
+                      'nav-link fs-14 font-secondary d-flex align-items-center active' :
+                      'nav-link fs-14 font-secondary d-flex align-items-center' ?>" 
+                    href="index.php?action=profile&id=<?= $_SESSION['userId'] ?>">
+                    <?php include('img/icons/account.svg') ?>
+                    <span class="ms-5">Mon compte</span>
+                  </a>
+                </li> 
               <?php } ?>
               <li class="nav-item ms-25 ms-xl-55">
                 <a 
@@ -74,7 +74,7 @@
                     'nav-link fs-14 font-secondary d-flex align-items-center active' :
                     'nav-link fs-14 font-secondary d-flex align-items-center' ?>" 
                   href="index.php?action=login">
-                  <?= isset($_SESSION['user']) ? "Déconnexion" : "Connexion" ?>
+                  <?= isset($_SESSION['userId']) ? "Déconnexion" : "Connexion" ?>
                 </a>
               </li>
             </ul>  

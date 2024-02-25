@@ -34,22 +34,11 @@
     }
 
     //Calculate the number of books owned by the user.
-    public function getBooksCount() : string
+    public function getBooksCount() : int
     {
         $count = count($this->getBooks());
 
-        switch ($count) {
-            case 0:
-                $result = 'Aucun livre';
-                break;
-            case 1:
-                $result = '1 livre';
-                break;
-            default:
-                $result = $count . ' livres';
-        }
-
-        return $result;
+        return $count;
     }
 
     //Calculate the period of time since the user signed up.

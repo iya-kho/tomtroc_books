@@ -28,7 +28,8 @@ try {
           $adminController = new AdminController();
           $adminController->showProfile();
           break;
-        case 'login' || 'signup':
+        case 'login':
+        case 'signup':
           $adminController = new AdminController();
           $adminController->showLoginSignup();
           break;
