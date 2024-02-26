@@ -305,6 +305,17 @@ header {
       }
     }
   }
+
+  .login-info {
+    input {
+      height: 50px;
+    }
+  }
+
+  .private-profile .userinfo,
+  .private-profile .login-info {
+    height: 510px;
+  }
 }
 
 //Login/Signup page

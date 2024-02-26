@@ -24,14 +24,21 @@ try {
           $bookController = new BookController();
           $bookController->showOneBook();
           break;
-        case 'profile':
-          $adminController = new AdminController();
-          $adminController->showProfile();
-          break;
         case 'login':
         case 'signup':
           $adminController = new AdminController();
           $adminController->showLoginSignup();
+          break;
+        //Public or private profile
+        case 'profile':
+          $adminController = new AdminController();
+          $adminController->showProfile();
+          break;
+        //Admin
+        case 'modifyUserInfo':
+          echo '<pre>';
+          print_r($_POST);
+          echo '</pre>';
           break;
         default:
           throw new Exception("The requested page does not exist.");

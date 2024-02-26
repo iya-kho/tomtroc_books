@@ -21,9 +21,14 @@ class AdminController
       throw new Exception("The requested user does not exist.");
     }
 
+    $profile = 'public';
+    if (isset($_SESSION['userId']) && $_SESSION['userId'] == $userId) {
+      $profile = 'private';
+    }
+
     //Render the view
     $view = new View("Profile");
-    $view->render("profile", ['user' => $user]);
+    $view->render("profile", ['user' => $user, 'profile' => $profile]);
   }
 
   public function showLoginSignup()

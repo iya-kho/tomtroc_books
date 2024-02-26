@@ -3,7 +3,9 @@
   <div class="col">
       <article class="card p-0 position-relative border-light">
         <a href="index.php?action=book&id=<?= $book->getId() ?>">
-          <img src="<?= $book->getImageUrl() ?>" alt="<?= $book->getTitle() ?>" class="card-img-top">
+          <div class="ratio ratio-1x1">
+            <img src="<?= $book->getImageUrl() ?>" alt="<?= $book->getTitle() ?>" class="card-img-top object-fit-cover">
+          </div>
           <span class="<?= $book->getAvailability() ? 
               'd-none' : 
               'position-absolute availability text-white font-secondary fs-8 py-5 px-15' ?>">

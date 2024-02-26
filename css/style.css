@@ -19687,6 +19687,13 @@ header .collapsing li, header .show li {
     border-bottom-right-radius: inherit;
   }
 }
+#profile .login-info input {
+  height: 50px;
+}
+#profile .private-profile .userinfo,
+#profile .private-profile .login-info {
+  height: 510px;
+}
 
 .login-page form {
   max-width: 325px;

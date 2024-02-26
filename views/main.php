@@ -59,7 +59,7 @@
                 </li>
                 <li class="nav-item ms-25 ms-xl-55">
                   <a 
-                    class="<?= Utils::request('action') === 'profile' ?
+                    class="<?= Utils::request('action') === 'profile' && Utils::request('id') == $_SESSION['userId'] ?
                       'nav-link fs-14 font-secondary d-flex align-items-center active' :
                       'nav-link fs-14 font-secondary d-flex align-items-center' ?>" 
                     href="index.php?action=profile&id=<?= $_SESSION['userId'] ?>">
@@ -94,5 +94,6 @@
       </ul>
     </footer>
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
   </body>
 </html>
