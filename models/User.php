@@ -92,7 +92,7 @@
     //Setter for the password.
     public function setPassword(string $password) : void
     {
-        $this->password = $password;
+        $this->password = password_hash($password, PASSWORD_DEFAULT);
     }
 
     //Getter for the password.

@@ -51,7 +51,7 @@
       <div class="col">
         <div class="bg-white rounded pt-40 pb-45 px-30 px-lg-115 login-info">
           <h2 class="fs-16 font-secondary mb-25">Vos informations personnelles</h2>
-          <form action="index.php?action=modifyUserInfo" method="post" id="modifyUserInfo">
+          <form action="index.php?action=modifyUserInfo" method="post" id="modifyUserInfo" enctype="multipart/form-data">
             <input type="hidden" name="userId" value="<?= $user->getId() ?>" />
             <div class="mb-30 mb-lg-35 font-secondary fs-14">
               <label for="email" class="form-label font-secondary fs-14 text-transparent">Adresse email</label>

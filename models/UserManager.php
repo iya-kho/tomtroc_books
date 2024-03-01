@@ -32,4 +32,19 @@ class UserManager extends AbstractEntityManager
       'date_signup' => Utils::dateToString($user->getDateSignup())
     ]);
   }
+
+  /**
+   * Modify the information of a user in the database.
+   */
+  public function updateUser(User $user) : void
+  {
+    $sql = "UPDATE users SET username = :username, email = :email, password = :password, image_url = :image_url WHERE id = :id";
+    $this->db->query($sql, [
+      'username' => $user->getUsername(),
+      'email' => $user->getEmail(),
+      'password' => $user->getPassword(),
+      'image_url' => $user->getImageUrl(),
+      'id' => $user->getId()
+    ]);
+  }
 }

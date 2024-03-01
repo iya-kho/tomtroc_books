@@ -36,9 +36,8 @@ try {
           break;
         //Admin
         case 'modifyUserInfo':
-          echo '<pre>';
-          print_r($_POST);
-          echo '</pre>';
+          $adminController = new AdminController();
+          $adminController->modifyUserInfo();
           break;
         default:
           throw new Exception("The requested page does not exist.");

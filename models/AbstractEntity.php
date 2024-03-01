@@ -54,4 +54,16 @@ abstract class AbstractEntity
     {
         return $this->id;
     }
+
+    /**
+     * Setter for all attributes.
+     * @param string $attribute
+     * @param mixed $value
+     * @return void
+     */
+    public function setAttribute(string $attribute, $value) : void
+    {
+        $method = 'set' . ucwords($attribute);
+        $this->$method($value);
+    }
 }

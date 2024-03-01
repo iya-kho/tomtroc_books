@@ -168,11 +168,76 @@ class AdminController
     $user = new User();
     $user->setUsername($username);
     $user->setEmail($email);
-    $user->setPassword(password_hash($password, PASSWORD_DEFAULT));
+    $user->setPassword($password);
     $user->setDateSignup(new DateTime());
 
     $this->userManager->addUser($user);
 
     return [$isValid, $errors];
+  }
+
+  public function modifyUserInfo()
+  { 
+    //Find the user by id
+    $userId = $_POST['userId'];
+    $user = $this->userManager->findUser('id', $userId) ?? null;
+
+    //Process the text fields of the form
+    foreach ($_POST as $key => $value) {
+      if ($key != 'userPic' && $key !='userId' && !empty($value) && trim($value) != '') {
+        $user->setAttribute($key, htmlspecialchars($value));
+      }
+    }
+
+    //Process the image field of the form
+
+    if (!empty($_FILES['userPic']['name'])) {
+      $imgPath = $this->processImage('img/userpics/', 'userPic');
+      
+      if ($imgPath) {
+        $user->setImageUrl($imgPath);
+      }
+    }
+
+    //Update the user in the database
+    $this->userManager->updateUser($user);
+
+    //Redirect to the user's profile
+    Utils::redirect("profile&id=" . $user->getId());
+  }
+
+  /**
+   * Process the file upload. Method takes the target directory and the name of the file input as parameters.
+   * Returns the path of the uploaded file.
+   * @param string $target_dir
+   * @param string $fileInputName
+   * @return string
+   */
+  private function processImage($target_dir, $fileInputName): string
+  {
+    $target_file = $target_dir . basename($_FILES[$fileInputName]["name"]);
+    $uploadOk = 1;
+    $errors = [];
+    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+    
+    //Check if the file has the right format
+    $allowedFormats = ["jpg", "png", "jpeg", "webp"];
+    if(!in_array($imageFileType, $allowedFormats)) {
+      $uploadOk = 0;
+    }
+
+    //Check if the file is too large
+    if ($_FILES[$fileInputName]["size"] > 500000) {
+      $uploadOk = 0;
+    }
+
+    //If the file is valid, move it to the target directory
+    if ($uploadOk == 1) {
+      if (move_uploaded_file($_FILES[$fileInputName]["tmp_name"], $target_file)) {
+        return $target_file;
+      }
+    }    
+
+    return false;
   }
 }
