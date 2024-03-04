@@ -19694,6 +19694,9 @@ header .collapsing li, header .show li {
 #profile .private-profile .login-info {
   height: 510px;
 }
+#profile .errors {
+  top: 220px;
+}
 
 .login-page form {
   max-width: 325px;

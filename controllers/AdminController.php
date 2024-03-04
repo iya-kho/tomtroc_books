@@ -28,7 +28,7 @@ class AdminController
 
     //Render the view
     $view = new View("Profile");
-    $view->render("profile", ['user' => $user, 'profile' => $profile]);
+    $view->render("profile", ['user' => $user, 'profile' => $profile, 'userPicErrors' => []]);
   }
 
   public function showLoginSignup()
@@ -52,6 +52,7 @@ class AdminController
         $action = 'login';
         $messageColor = 'success';
         $messages[] = "Votre compte a bien été créé.\n Vous pouvez vous connecter.";
+        $_SERVER['REQUEST_METHOD'] = 'GET';
       }
 
       //If the form is not valid, show the signup page with the errors
@@ -168,7 +169,7 @@ class AdminController
     $user = new User();
     $user->setUsername($username);
     $user->setEmail($email);
-    $user->setPassword($password);
+    $user->setPassword(password_hash($password, PASSWORD_DEFAULT));
     $user->setDateSignup(new DateTime());
 
     $this->userManager->addUser($user);
@@ -181,63 +182,53 @@ class AdminController
     //Find the user by id
     $userId = $_POST['userId'];
     $user = $this->userManager->findUser('id', $userId) ?? null;
+    $userPicErrors = [];
 
     //Process the text fields of the form
     foreach ($_POST as $key => $value) {
-      if ($key != 'userPic' && $key !='userId' && !empty($value) && trim($value) != '') {
-        $user->setAttribute($key, htmlspecialchars($value));
+      if (!empty($value) && trim($value) != '') {
+        switch($key) {
+          case 'username':
+          case 'email':
+            $user->setAttribute($key, htmlspecialchars($value));
+            break;
+          case 'password':
+            $user->setPassword(password_hash(htmlspecialchars($value), PASSWORD_DEFAULT));
+            break;
+          default:
+            break;
+        }
       }
     }
 
-    //Process the image field of the form
+    //Process the profile picture
 
     if (!empty($_FILES['userPic']['name'])) {
-      $imgPath = $this->processImage('img/userpics/', 'userPic');
-      
-      if ($imgPath) {
-        $user->setImageUrl($imgPath);
+      $target_dir = "img/userpics/";
+      $target_file = $target_dir . basename($_FILES["userPic"]["name"]);
+      $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
+      //Validate the image
+      $userPicErrors = Utils::imageValidate($_FILES["userPic"]);
+
+      if (empty($userPicErrors)) {
+        if (move_uploaded_file($_FILES["userPic"]["tmp_name"], $target_file)) {
+          $user->setImageUrl($target_file);
+        } else {
+          $userPicErrors[] = "Votre fichier n'a pas pu être téléchargé.";
+        }
       }
     }
+    
 
     //Update the user in the database
     $this->userManager->updateUser($user);
 
-    //Redirect to the user's profile
-    Utils::redirect("profile&id=" . $user->getId());
+    //Re-render the view
+    $view = new View("Profile");
+    $view->render("profile", ['user' => $user, 'profile' => 'private', 'userPicErrors' => $userPicErrors]);
+
   }
 
-  /**
-   * Process the file upload. Method takes the target directory and the name of the file input as parameters.
-   * Returns the path of the uploaded file.
-   * @param string $target_dir
-   * @param string $fileInputName
-   * @return string
-   */
-  private function processImage($target_dir, $fileInputName): string
-  {
-    $target_file = $target_dir . basename($_FILES[$fileInputName]["name"]);
-    $uploadOk = 1;
-    $errors = [];
-    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-    
-    //Check if the file has the right format
-    $allowedFormats = ["jpg", "png", "jpeg", "webp"];
-    if(!in_array($imageFileType, $allowedFormats)) {
-      $uploadOk = 0;
-    }
 
-    //Check if the file is too large
-    if ($_FILES[$fileInputName]["size"] > 500000) {
-      $uploadOk = 0;
-    }
-
-    //If the file is valid, move it to the target directory
-    if ($uploadOk == 1) {
-      if (move_uploaded_file($_FILES[$fileInputName]["tmp_name"], $target_file)) {
-        return $target_file;
-      }
-    }    
-
-    return false;
-  }
 }

@@ -4,7 +4,7 @@
   <div class="container">
     <div class="row row-cols-1 row-cols-lg-2 g-30 <?=$profile === 'private' ? 'private-profile' : ''?>">
       <!-- Show the user's public information -->
-      <div class="col <?= $profile === 'private' ? 'col-lg-6' : 'col-lg-4' ?>">
+      <div class="col <?= $profile === 'private' ? 'col-lg-6 position-relative' : 'col-lg-4' ?>">
         <div class="userinfo bg-white rounded pt-45 pb-55 px-55 <?= $profile === 'private' ? 'px-lg-150' : '' ?> d-flex flex-column align-items-center">
           <div class="imgWrap rounded-circle d-flex align-items-center justify-content-center bg-dark" id="userPicWrap">
             <?php if ($user->getImageUrl()) { ?>
@@ -12,6 +12,12 @@
             <?php } else { ?>
               <span class="font-primary text-uppercase fs-30"><?= substr($user->getUsername(), 0, 1) ?></span>
             <?php } ?>
+          </div>
+          <div class="text-danger font-secondary fs-10 position-absolute errors">
+          <?php if (isset($userPicErrors) && !empty($userPicErrors)) { 
+            foreach ($userPicErrors as $error) { ?>
+              <p><?= $error ?></p>
+          <?php }} ?>
           </div>
           <?php if ($profile === 'private') { ?>
           <input type="file" name="userPic" id="modifyUserPic" class="d-none" form="modifyUserInfo"/>
