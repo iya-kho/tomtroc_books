@@ -9,6 +9,10 @@ class AdminController
     $this->userManager = new UserManager();
   }
 
+  /**
+   * Show the user public or private profile
+   */
+
   public function showProfile()
   {
     //Get the user id from the URL
@@ -28,9 +32,12 @@ class AdminController
 
     //Render the view
     $view = new View("Profile");
-    $view->render("profile", ['user' => $user, 'profile' => $profile, 'userPicErrors' => []]);
+    $view->render("profile", ['user' => $user, 'profile' => $profile, 'picErrors' => []]);
   }
 
+  /**
+   * Show the login/signup page
+   */
   public function showLoginSignup()
   {
     //If the user is already connected, log them out and redirect to the home page
@@ -82,6 +89,9 @@ class AdminController
     $view->render("loginSignup", ['action' => $action, 'messageColor' => $messageColor, 'messages' => $messages]);
   }
 
+  /**
+   * Process the login form
+   */
   private function processLogin()
   {
     $isValid = true;
@@ -119,6 +129,9 @@ class AdminController
     return [$isValid, $errors];
   }
 
+  /**
+   * Process the signup form
+   */
   private function processSignup() 
   {
     $isValid = true;
@@ -177,58 +190,117 @@ class AdminController
     return [$isValid, $errors];
   }
 
+  /**
+   * Process the form from the private profile page
+   * to modify the user's information
+   */
   public function modifyUserInfo()
   { 
+    //Check if the user is connected
+    $this->checkIfUserIsConnected();
+
     //Find the user by id
     $userId = $_POST['userId'];
     $user = $this->userManager->findUser('id', $userId) ?? null;
-    $userPicErrors = [];
 
     //Process the text fields of the form
-    foreach ($_POST as $key => $value) {
-      if (!empty($value) && trim($value) != '') {
-        switch($key) {
-          case 'username':
-          case 'email':
-            $user->setAttribute($key, htmlspecialchars($value));
-            break;
-          case 'password':
-            $user->setPassword(password_hash(htmlspecialchars($value), PASSWORD_DEFAULT));
-            break;
-          default:
-            break;
-        }
-      }
-    }
+    $user->setAttributesFromForm('userId');
 
     //Process the profile picture
-
-    if (!empty($_FILES['userPic']['name'])) {
-      $target_dir = "img/userpics/";
-      $target_file = $target_dir . basename($_FILES["userPic"]["name"]);
-      $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-
-      //Validate the image
-      $userPicErrors = Utils::imageValidate($_FILES["userPic"]);
-
-      if (empty($userPicErrors)) {
-        if (move_uploaded_file($_FILES["userPic"]["tmp_name"], $target_file)) {
-          $user->setImageUrl($target_file);
-        } else {
-          $userPicErrors[] = "Votre fichier n'a pas pu être téléchargé.";
-        }
-      }
-    }
-    
+    $picErrors = $user->setImageFromForm('userPic', 'img/userpics/');
 
     //Update the user in the database
     $this->userManager->updateUser($user);
 
     //Re-render the view
     $view = new View("Profile");
-    $view->render("profile", ['user' => $user, 'profile' => 'private', 'userPicErrors' => $userPicErrors]);
+    $view->render("profile", ['user' => $user, 'profile' => 'private', 'picErrors' => $picErrors]);
 
   }
 
+  /**
+   * Delete a book
+   */
+  public function deleteBook()
+  {
+    $this->checkIfUserIsConnected();
+
+    $id = Utils::request("id", -1);
+
+    // Delete the book.
+    $bookManager = new BookManager();
+    $bookManager->deleteBook($id);
+    
+    // Redirect to the profile page.
+    Utils::redirect('profile&id=' . $_SESSION['userId']);
+  }
+
+/**
+ * Show the form to modify a book
+ */
+  public function modifyBook()
+  {
+    $this->checkIfUserIsConnected();
+
+    $id = Utils::request("id", -1);
+
+    // Find the book by its id.
+    $bookManager = new BookManager();
+    $book = $bookManager->getBookById($id);
+
+    // If the book does not exist, throw an exception.
+    if (!$book) {
+      throw new Exception("The requested book does not exist.");
+    }
+
+    // Render the view.
+    $view = new View("Book");
+    $view->render("modifyBook", ['book' => $book, 'picErrors' => []]);
+  }
+
+  // Process the form to modify a book
+  public function modifyBookForm()
+  {
+    $this->checkIfUserIsConnected();
+
+    // Find the book by its id.
+    $id = $_POST['id'];
+
+    $bookManager = new BookManager();
+    $book = $bookManager->getBookById($id);
+
+    // If the book does not exist, throw an exception.
+    if (!$book) {
+      throw new Exception("The requested book does not exist.");
+    }
+
+    // // Process the text fields of the form.
+    $book->setAttributesFromForm();
+
+    // // Process the book cover.
+    $picErrors = $book->setImageFromForm('bookImg', 'img/books/');
+
+    // // Update the book in the database.
+    $bookManager->updateBook($book);
+
+    //If the form is valid, redirect to the profile page
+    if (empty($picErrors)) {
+      Utils::redirect('profile&id=' . $_SESSION['userId']);
+    }
+
+    // If the form is not valid, show the errors.
+    $view = new View("Book");
+    $view->render("modifyBook", ['book' => $book, 'picErrors' => $picErrors]);
+  }
+
+  /**
+   * Check if the user is connected
+   */
+  private function checkIfUserIsConnected() : void
+  {
+    if (!isset($_SESSION['userId'])) {
+      Utils::redirect('login');
+    }
+  }
 
 }

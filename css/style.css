@@ -10568,6 +10568,10 @@ textarea.form-control-lg {
   font-size: 0.625rem !important;
 }
 
+.fs-11 {
+  font-size: 0.6875rem !important;
+}
+
 .fs-12 {
   font-size: 0.75rem !important;
 }
@@ -19722,6 +19726,28 @@ header .collapsing li, header .show li {
 }
 .login-page input {
   height: 50px;
+}
+
+.modify-book .rounded {
+  border-radius: 20px !important;
+}
+.modify-book img {
+  object-fit: cover !important;
+  max-width: 100%;
+}
+.modify-book input, .modify-book select, .modify-book option {
+  height: 50px;
+}
+.modify-book textarea {
+  height: 435px;
+}
+@media (min-width: 992px) {
+  .modify-book .photo-label {
+    font-size: 14px !important;
+  }
+}
+.modify-book .errors {
+  top: 5px;
 }
 
 footer {

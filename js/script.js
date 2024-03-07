@@ -1,6 +1,6 @@
-// Validate the file format and preview the image in the user's profile before upload
+// Validate the file format and preview the image before upload
 
-function imagePreview(fileInput) {
+function imagePreview(fileInput, picWrapId) {
   //Check the file format
   let filePath = fileInput.value;
   let allowedExtensions = /(\.jpg|\.jpeg|\.png|\.webp)$/i;
@@ -13,13 +13,25 @@ function imagePreview(fileInput) {
       if (fileInput.files && fileInput.files[0]) {
           let reader = new FileReader();
           reader.onload = function(e) {
-              document.getElementById('userPicWrap').innerHTML = '<img src="'+e.target.result+'"/>';
+              document.getElementById(picWrapId).innerHTML = '<img src="'+e.target.result+'"/>';
           };
           reader.readAsDataURL(fileInput.files[0]);
       }
   }
 }
 
-document.getElementById('modifyUserPic').addEventListener('change', function () {
-  imagePreview(this);
-});
+// Preview the userpic in the user's private profile before upload
+const modifyUserPic = document.getElementById('modifyUserPic');
+if (modifyUserPic) {
+  modifyUserPic.addEventListener('change', function () {
+    imagePreview(this, 'userPicWrap');
+  });
+}
+
+// Preview the book cover in the modify book form before upload
+const modifyBookImg = document.getElementById('modifyBookImg');
+if (modifyBookImg) {
+  modifyBookImg.addEventListener('change', function () {
+    imagePreview(this, 'bookCoverWrap');
+  });
+}

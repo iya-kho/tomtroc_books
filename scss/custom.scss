@@ -350,6 +350,37 @@ header {
   }
 }
 
+//Modify a book
+
+.modify-book {
+  .rounded {
+    border-radius: 20px!important;
+  };
+
+  img {
+    object-fit: cover !important;
+    max-width: 100%;
+  }
+
+  input, select, option {
+    height: 50px;
+  }
+
+  textarea {
+    height: 435px;
+  }
+
+  .photo-label {
+    @include desktop {
+      font-size: 14px !important;   
+    }
+  }
+
+  .errors {
+    top: 5px;
+  }
+}
+
 //Footer
 footer {
   height: $footer-height-mobile;

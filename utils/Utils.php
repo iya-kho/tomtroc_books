@@ -104,7 +104,7 @@ class Utils {
    * 
    * @return array An array containing the errors
    */
-  public static function imageValidate($file, $maxSize = 500000, $validExtensions = ['jpg', 'jpeg', 'png', 'webp']) : array
+  private static function imageValidate($file, $maxSize = 500000, $validExtensions = ['jpg', 'jpeg', 'png', 'webp']) : array
   {
     $errors = [];
     $fileSize = $file['size'];
@@ -120,5 +120,46 @@ class Utils {
 
     return $errors;
   }
+
+  /**
+   * Method to upload an image
+   * 
+   * @param string $fileName The name of the file to upload
+   * @param string $targetDir The directory to upload the file to
+   * 
+   * @return array An array containing the errors and the path of the uploaded file
+   */
+  public static function uploadImage($fileName, $targetDir): array
+  {
+    $targetFile = $targetDir . basename($_FILES[$fileName]["name"]);
+    $imageFileType = strtolower(pathinfo($targetFile,PATHINFO_EXTENSION));
+
+    //Validate the image
+    $picErrors = self::imageValidate($_FILES[$fileName]);
+
+    if (!empty ($picErrors)) {
+      return [$picErrors, null];
+    }
+
+    if (!move_uploaded_file($_FILES[$fileName]["tmp_name"], $targetFile)) {
+      $picErrors[] = "Votre fichier n'a pas pu être téléchargé.";
+
+      return [$picErrors, null];
+    }
+
+    return [$picErrors, $targetFile];
+
+  }
+
+  /**
+   * Method to ask for confirmation before performing an action
+   * 
+   * @param string $message The message to display
+   * @return string JavaScript code to insert in the HTML
+   */
+  public static function askConfirmation(string $message) : string
+    {
+        return "onclick=\"return confirm('$message');\"";
+    }
 
 }

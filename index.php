@@ -39,6 +39,18 @@ try {
           $adminController = new AdminController();
           $adminController->modifyUserInfo();
           break;
+        case 'deleteBook':
+          $adminController = new AdminController();
+          $adminController->deleteBook();
+          break;
+        case 'modifyBook':
+          $adminController = new AdminController();
+          $adminController->modifyBook();
+          break;
+        case 'modifyBookForm':
+          $adminController = new AdminController();
+          $adminController->modifyBookForm();
+          break;
         default:
           throw new Exception("The requested page does not exist.");
     }

@@ -56,14 +56,50 @@ abstract class AbstractEntity
     }
 
     /**
-     * Setter for all attributes.
-     * @param string $attribute
-     * @param mixed $value
+     * Set attributes with the text data from a submitted form.
+     * The method will not set the id attribute and image URL.
+     * @param string $id
      * @return void
      */
-    public function setAttribute(string $attribute, $value) : void
+    public function setAttributesFromForm($id = 'id') : void
     {
-        $method = 'set' . ucwords($attribute);
-        $this->$method($value);
+        foreach ($_POST as $key => $value) {
+            if (empty($value) || trim($value) === '' || $key === $id) {
+                continue;
+            } 
+
+            $value = htmlspecialchars($value);
+
+            if ($key === 'password') {
+                $value = password_hash($value, PASSWORD_DEFAULT);
+            }
+
+            if ($value === 'true' || $value === 'false') {
+                $value = filter_var($value, FILTER_VALIDATE_BOOLEAN);
+            }
+
+            $method = 'set' . ucwords($key);
+            $this->$method($value);
+        }   
+    }
+
+    /**
+     * Set the image URL from a submitted form.
+     * The method returns an array of errors if the image is not valid.
+     * @param string $imgName
+     * @param string $filePath
+     * @return array
+     */
+    public function setImageFromForm($imgName, $filePath): array 
+    {
+        if (!empty($_FILES[$imgName]['name'])) {
+            list($picErrors, $picPath) = Utils::uploadImage($imgName, $filePath);
+
+            if (empty($picErrors)) {
+                $this->setImageUrl($picPath);
+            }
+        } 
+        
+        return $picErrors ?? [];
     }
 }

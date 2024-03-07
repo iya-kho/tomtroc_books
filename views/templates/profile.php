@@ -14,8 +14,8 @@
             <?php } ?>
           </div>
           <div class="text-danger font-secondary fs-10 position-absolute errors">
-          <?php if (isset($userPicErrors) && !empty($userPicErrors)) { 
-            foreach ($userPicErrors as $error) { ?>
+          <?php if (isset($picErrors) && !empty($picErrors)) { 
+            foreach ($picErrors as $error) { ?>
               <p><?= $error ?></p>
           <?php }} ?>
           </div>
@@ -113,7 +113,7 @@
                     <a href="index.php?action=modifyBook&id=<?= $book->getId()?>" class="fs-16 text-decoration-underline me-40">
                       Éditer
                     </a>
-                    <a href="index.php?action=deleteBook&id=<?= $book->getId()?>" class="fs-16 text-decoration-underline delete-link">
+                    <a href="index.php?action=deleteBook&id=<?= $book->getId()?>" class="fs-16 text-decoration-underline delete-link" <?= Utils::askConfirmation("Êtes-vous sûr de vouloir supprimer ce livre ?") ?>>
                       Supprimer
                     </a>
                   </div>
@@ -175,7 +175,7 @@
                   <a href="index.php?action=modifyBook&id=<?= $book->getId()?>" class="fs-12 text-decoration-underline me-40">
                     Éditer
                   </a>
-                  <a href="index.php?action=deleteBook&id=<?= $book->getId()?>" class="fs-12 text-decoration-underline delete-link">
+                  <a href="index.php?action=deleteBook&id=<?= $book->getId()?>" class="fs-12 text-decoration-underline delete-link" <?= Utils::askConfirmation("Êtes-vous sûr de vouloir supprimer ce livre ?") ?>>
                     Supprimer
                   </a>
                 </div>
