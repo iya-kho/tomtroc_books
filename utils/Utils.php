@@ -158,8 +158,27 @@ class Utils {
    * @return string JavaScript code to insert in the HTML
    */
   public static function askConfirmation(string $message) : string
-    {
-        return "onclick=\"return confirm('$message');\"";
+  {
+      return "onclick=\"return confirm('$message');\"";
+  }
+
+  /**
+   * Method to cut a text
+   * 
+   * @param string $text The text to cut
+   * @param int $length The length of the text
+   * @return string The cut text
+   */
+  public static function truncate(string $text, int $length = -1) : string 
+  {
+    if ($length > 0) {
+      $cutText = mb_substr($text, 0, $length);
+      if (strlen($text) > $length) {
+        $cutText .= "...";
+      }
+      return $cutText;
     }
+    return $text;
+  }
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-class AdminController 
+class UserController 
 {
   private UserManager $userManager;
 
@@ -219,84 +219,9 @@ class AdminController
   }
 
   /**
-   * Delete a book
-   */
-  public function deleteBook()
-  {
-    $this->checkIfUserIsConnected();
-
-    $id = Utils::request("id", -1);
-
-    // Delete the book.
-    $bookManager = new BookManager();
-    $bookManager->deleteBook($id);
-    
-    // Redirect to the profile page.
-    Utils::redirect('profile&id=' . $_SESSION['userId']);
-  }
-
-/**
- * Show the form to modify a book
- */
-  public function modifyBook()
-  {
-    $this->checkIfUserIsConnected();
-
-    $id = Utils::request("id", -1);
-
-    // Find the book by its id.
-    $bookManager = new BookManager();
-    $book = $bookManager->getBookById($id);
-
-    // If the book does not exist, throw an exception.
-    if (!$book) {
-      throw new Exception("The requested book does not exist.");
-    }
-
-    // Render the view.
-    $view = new View("Book");
-    $view->render("modifyBook", ['book' => $book, 'picErrors' => []]);
-  }
-
-  // Process the form to modify a book
-  public function modifyBookForm()
-  {
-    $this->checkIfUserIsConnected();
-
-    // Find the book by its id.
-    $id = $_POST['id'];
-
-    $bookManager = new BookManager();
-    $book = $bookManager->getBookById($id);
-
-    // If the book does not exist, throw an exception.
-    if (!$book) {
-      throw new Exception("The requested book does not exist.");
-    }
-
-    // // Process the text fields of the form.
-    $book->setAttributesFromForm();
-
-    // // Process the book cover.
-    $picErrors = $book->setImageFromForm('bookImg', 'img/books/');
-
-    // // Update the book in the database.
-    $bookManager->updateBook($book);
-
-    //If the form is valid, redirect to the profile page
-    if (empty($picErrors)) {
-      Utils::redirect('profile&id=' . $_SESSION['userId']);
-    }
-
-    // If the form is not valid, show the errors.
-    $view = new View("Book");
-    $view->render("modifyBook", ['book' => $book, 'picErrors' => $picErrors]);
-  }
-
-  /**
    * Check if the user is connected
    */
-  private function checkIfUserIsConnected() : void
+  public function checkIfUserIsConnected() : void
   {
     if (!isset($_SESSION['userId'])) {
       Utils::redirect('login');

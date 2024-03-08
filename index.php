@@ -26,30 +26,34 @@ try {
           break;
         case 'login':
         case 'signup':
-          $adminController = new AdminController();
-          $adminController->showLoginSignup();
+          $userController = new UserController();
+          $userController->showLoginSignup();
           break;
         //Public or private profile
         case 'profile':
-          $adminController = new AdminController();
-          $adminController->showProfile();
+          $userController = new UserController();
+          $userController->showProfile();
           break;
         //Admin
         case 'modifyUserInfo':
-          $adminController = new AdminController();
-          $adminController->modifyUserInfo();
+          $userController = new UserController();
+          $userController->modifyUserInfo();
           break;
         case 'deleteBook':
-          $adminController = new AdminController();
-          $adminController->deleteBook();
+          $bookController = new BookController();
+          $bookController->deleteBook();
           break;
         case 'modifyBook':
-          $adminController = new AdminController();
-          $adminController->modifyBook();
+          $bookController = new BookController();
+          $bookController->modifyBook();
           break;
         case 'modifyBookForm':
-          $adminController = new AdminController();
-          $adminController->modifyBookForm();
+          $bookController = new BookController();
+          $bookController->modifyBookForm();
+          break;
+        case 'messenger':
+          $messageController = new MessageController();
+          $messageController->showMessenger();
           break;
         default:
           throw new Exception("The requested page does not exist.");

@@ -14,29 +14,29 @@
     private string $description = '';
     private bool $availability = false;
     private ?DateTime $dateCreation = null;
-    private ?User $user = null;
+    private ?User $owner = null;
 
     /**
      * Get information about the user who owns the book.
      */
-    public function getUser() : User
+    public function getOwner() : User
     {
-        if (!$this->user) {
-            $this->setUser();
+        if (!$this->owner) {
+            $this->setOwner();
         }
 
-        return $this->user;
+        return $this->owner;
     }
 
     /**
      * Set the user who owns the book.
      */
-    private function setUser() : void
+    private function setOwner() : void
     {
         $userManager = new UserManager();
-        $user = $userManager->findUser('id', $this->userId);
+        $owner = $userManager->findUser('id', $this->userId);
 
-        $this->user = $user;
+        $this->owner = $owner;
     }
   
     /**
@@ -128,14 +128,7 @@
      */
     public function getDescription(int $length = -1) : string 
     {
-        if ($length > 0) {
-            $description = mb_substr($this->description, 0, $length);
-            if (strlen($this->description) > $length) {
-                $description .= "...";
-            }
-            return $description;
-        }
-        return $this->description;
+        return Utils::truncate($this->description, $length);
     }
 
     /**
@@ -156,12 +149,11 @@
         return $this->availability;
     }
 
-    // /**
-    //  * Setter for the date of creation. If the date is a string, we convert it to a DateTime object.
-    //  * @param string|DateTime $dateCreation
-    //  * @param string $format : the format for the date conversion if it's a string.
-    //  * By default, it's the mysql date format that is used.
-    //  */ 
+    /**
+    * Setter for the date of creation. If the date is a string, we convert it to a DateTime object.
+    * @param string|DateTime $dateCreation
+    * By default, it's the mysql date format that is used.
+    */ 
     public function setDateCreation(string|DateTime $dateCreation) : void 
     {
         $this->dateCreation = Utils::stringToDate($dateCreation);

@@ -19,7 +19,7 @@
           </a>
           <a href="index.php?action=profile&id=<?= $book->getUserId() ?>"
               class="card-text font-secondary fs-8 text-transparent fst-italic">
-              Vendu par : <?= $book->getUser()->getUsername() ?>
+              Vendu par : <?= $book->getOwner()->getUsername() ?>
           </a>
         </div>
       </article>
