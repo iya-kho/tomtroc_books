@@ -19750,9 +19750,47 @@ header .collapsing li, header .show li {
   top: 5px;
 }
 
-#messenger img {
+.messenger img {
   width: 50px;
   height: 50px;
+}
+@media (min-width: 992px) {
+  .messenger .chat-preview {
+    border: none !important;
+  }
+}
+.messenger .no-chat-message {
+  border-radius: 30px !important;
+  height: fit-content;
+}
+.messenger input {
+  height: 50px;
+}
+.messenger input::placeholder {
+  color: #A6A6A6;
+}
+.messenger .vertical-scroll {
+  overflow: auto;
+}
+.messenger .chat {
+  max-height: calc(100vh - 56px - 155px - 90px);
+}
+@media (min-width: 992px) {
+  .messenger .chat {
+    max-height: calc(100vh - 80px - 135px - 155px - 100px);
+  }
+}
+.messenger .chat-preview {
+  max-height: calc(100vh - 56px - 115px - 40px);
+}
+@media (min-width: 992px) {
+  .messenger .chat-preview {
+    max-height: calc(100vh - 80px - 115px - 40px);
+  }
+}
+.messenger .chat img {
+  width: 25px;
+  height: 25px;
 }
 
 footer {

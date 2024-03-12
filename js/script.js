@@ -35,3 +35,11 @@ if (modifyBookImg) {
     imagePreview(this, 'bookCoverWrap');
   });
 }
+
+//Automatically scroll down to the bottom of the chat when the page is loaded
+window.addEventListener('load', function() {
+  let chatBox = document.getElementById('chatBox');
+  if (chatBox) {
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }
+});

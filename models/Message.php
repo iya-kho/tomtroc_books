@@ -99,20 +99,36 @@ class Message extends AbstractEntity
 
   /**
    * Format the date and time of creation
+   * @param string $format : the format of the date and time.
    * @return string
    */
-  public function getFormattedDatetimeCreation() : string
+  public function getFormattedDatetimeCreation(string $format = 'short') : string
   {
     $now = new DateTime();
     $interval = $now->diff($this->datetimeCreation);
 
-    if ($interval->y > 0) {
-      $result = $this->datetimeCreation->format('j.m.Y');
-    } elseif ($interval->d > 0) {
-      $result = $this->datetimeCreation->format('j.m');
-    } else {
-      $result = $this->datetimeCreation->format('H:i');
+    if ($format === 'short') {
+      switch (true) {
+        case $interval->y > 0:
+          $result = $this->datetimeCreation->format('j.m.Y');
+          break;
+        case $interval->d > 0:
+          $result = $this->datetimeCreation->format('j.m');
+          break;
+        default:
+          $result = $this->datetimeCreation->format('H:i');
+      };
+
+      return $result;
     }
+
+    switch (true) {
+      case $interval->y > 0:
+        $result = $this->datetimeCreation->format('j.m.Y H:i');
+        break;
+      default:
+        $result = $this->datetimeCreation->format('j.m H:i');
+    };
 
     return $result;
   }

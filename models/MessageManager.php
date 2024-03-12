@@ -30,4 +30,27 @@ class MessageManager extends AbstractEntityManager
     return $messages;
   }
 
+  /**
+   * Get the messages between two users.
+   * @param int $userId : the id of the user.
+   * @param int $interlocutorId : the id of the interlocutor.
+   * @return array : an array of Message objects.
+   */
+  public function getMessagesBetweenUsers(int $userId, int $interlocutorId) : array
+  {
+    $sql = "SELECT * 
+            FROM messages 
+            WHERE (sender_id = :userId AND receiver_id = :interlocutorId) 
+            OR (sender_id = :interlocutorId AND receiver_id = :userId) 
+            ORDER BY datetime_creation DESC";
+    
+    $result = $this->db->query($sql, ['userId' => $userId, 'interlocutorId' => $interlocutorId]);
+    $messages = [];
+
+    while ($message = $result->fetch()) {
+      $messages[] = new Message($message);
+    }
+    return $messages;
+  }
+
 }

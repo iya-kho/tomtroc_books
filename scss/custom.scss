@@ -382,11 +382,54 @@ header {
 }
 
 //Messenger
-#messenger {
+.messenger {
   img {
     width: 50px;
     height: 50px;
   }
+
+  .chat-preview {
+    @include desktop {
+      border: none!important;
+    }
+  }
+
+  .no-chat-message {
+    border-radius: 30px !important;
+    height: fit-content;
+  }
+
+  input {
+    height: 50px;
+  }
+
+  input::placeholder {
+    color: $text-transparent;
+  }
+
+  .vertical-scroll {
+    overflow: auto;
+  }
+
+  .chat {
+    max-height: calc(100vh - #{$header-height-mobile} - 155px - 90px);
+    @include desktop {
+      max-height: calc(100vh - #{$header-height-desktop} - 135px - 155px - 100px);
+    }
+  }
+
+  .chat-preview {
+    max-height: calc(100vh - #{$header-height-mobile} - 115px - 40px);
+    @include desktop {
+      max-height: calc(100vh - #{$header-height-desktop} - 115px - 40px);
+    }
+  }
+
+  .chat img {
+    width: 25px;
+    height: 25px;
+  }
+
 }
 
 //Footer
