@@ -15,6 +15,7 @@ $link-color: #000;
 $spacer: 10px;
 $spacers: (
   0: 0,
+  1: $spacer * .25,
   5: $spacer * .5,
   10: $spacer,
   15: $spacer * 1.5,

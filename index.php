@@ -55,6 +55,10 @@ try {
           $messageController = new MessageController();
           $messageController->showMessenger();
           break;
+        case 'sendMessage':
+          $messageController = new MessageController();
+          $messageController->sendMessage();
+          break;
         default:
           throw new Exception("The requested page does not exist.");
     }

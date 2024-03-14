@@ -10,18 +10,21 @@ If not, it will show the last messages of the user. -->
         <h1 class="font-primary pb-25 pb-lg-35 ms-lg-30">Messagerie</h1>
         <div class="vertical-scroll chat-preview">
         <?php 
-        foreach ($chatLastMessages as $message) { ?>
-        <a href="index.php?action=messenger&id=<?= $message->getInterlocutor()->getId() ?>">
-          <div class="<?= $message->getInterlocutor()->getId() == $_GET['id'] ? 
+        foreach ($conversations as $conversation) { ?>
+        <a href="index.php?action=messenger&id=<?= $conversation->getInterlocutor()->getId() ?>">
+          <div class="<?= isset ($_GET['id']) && $conversation->getInterlocutor()->getId() == $_GET['id'] ? 
             'bg-white py-15 border-bottom border-white d-flex ps-lg-30 pe-lg-40' : 
             'py-15 border-bottom border-white d-flex ps-lg-30 pe-lg-40'?>">
-            <img src="<?= $message->getInterlocutor()->getImageUrl() ?>" alt="<?= $message->getInterlocutor()->getUsername() ?>" class="rounded-circle object-fit-cover me-10 ">
+            <img src="<?= $conversation->getInterlocutor()->getImageUrl() ?>" alt="<?= $conversation->getInterlocutor()->getUsername() ?>" class="rounded-circle object-fit-cover me-10 ">
             <div class="w-100">
-              <div class="d-flex justify-content-between">
-                <h2 class="font-secondary fs-14 mt-5"><?= $message->getInterlocutor()->getUsername() ?></h2>
-                <span class="font-secondary fs-12 mt-10"><?= $message->getFormattedDatetimeCreation() ?></span>
+              <div class="d-flex">
+                <h2 class="font-secondary fs-14 mt-5"><?= $conversation->getInterlocutor()->getUsername() ?></h2>
+                <?php if ($conversation->getUnreadMessagesCount() > 0) { ?>
+                <span class="messages-count font-secondary fs-9 text-white bg-black rounded p-1 fw-bold h-fit-content ms-5"><?= $conversation->getUnreadMessagesCount() ?></span>
+                <?php } ?>
+                <span class="font-secondary fs-12 mt-10 ms-auto"><?= $conversation->getLastMessage()->getFormattedDatetimeCreation() ?></span>
               </div>
-              <p class="font-secondary fs-12 text-transparent m-0"><?= $message->getContent(28) ?></p>
+              <p class="font-secondary fs-12 text-transparent m-0"><?= $conversation->getLastMessage()->getContent(28) ?></p>
             </div>
           </div>
         </a>

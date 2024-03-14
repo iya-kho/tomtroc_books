@@ -9,6 +9,10 @@ class View
      * Title of the page.
      */
     private string $title;
+    /**
+     * Connected user.
+     */
+    private ?User $user = null;
     
     
     /**
@@ -17,6 +21,7 @@ class View
     public function __construct($title) 
     {
         $this->title = $title;
+        $this->user = Utils::getUserSession();
     }
     
     /**
@@ -33,6 +38,7 @@ class View
         // The two variables below are used in the "main.php" which is the main template.
         $content = $this->renderViewFromTemplate($viewPath, $params);
         $title = $this->title;
+        $user = $this->user;
         ob_start();
         require(MAIN_VIEW_PATH);
         echo ob_get_clean();

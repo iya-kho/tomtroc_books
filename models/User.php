@@ -12,7 +12,16 @@
     private string $password = '';
     private string $imageUrl = '';
     private ?DateTime $dateSignup = null;
-    private array $books = [];    
+    private array $books = [];
+    
+    //Get the number of unread messages.
+    public function getUnreadMessagesCount() : int
+    {   
+        $messageManager = new MessageManager();
+        $unreadMessagesCount = $messageManager->getUnreadMessagesCount($this->id);
+        
+        return $unreadMessagesCount;
+    } 
 
     //Get information about the books owned by the user.
     public function getBooks() : array

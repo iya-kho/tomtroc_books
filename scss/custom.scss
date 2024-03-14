@@ -12,6 +12,14 @@
   color: $text-transparent;
 }
 
+.bg-black {
+  background-color: #000;
+}
+
+.h-fit-content {
+  height: fit-content;
+}
+
 .h-100 {
   min-height: calc(100vh - #{$header-height-mobile} - #{$footer-height-mobile});
   @include desktop {

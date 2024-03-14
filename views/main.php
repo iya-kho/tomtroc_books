@@ -46,7 +46,7 @@
               </li>
             </ul>
             <ul class="nav navbar-nav border-start">
-              <?php if (isset($_SESSION['userId'])) { ?>
+              <?php if ($user) { ?>
                 <li class="nav-item ms-25 ms-xl-55">
                   <a 
                     class="<?= Utils::request('action') === 'messenger' ?
@@ -55,14 +55,17 @@
                     href="index.php?action=messenger">
                     <?php include('img/icons/messenger.svg') ?>
                     <span class="ms-5">Messagerie</span>
+                    <?php if ($user && $user->getUnreadMessagesCount() > 0) { ?>
+                    <span class="messages-count font-secondary fs-9 text-white bg-black rounded p-1 fw-bold h-fit-content ms-5"><?= $user->getUnreadMessagesCount() ?></span>
+                    <?php } ?>
                   </a>
                 </li>
                 <li class="nav-item ms-25 ms-xl-55">
                   <a 
-                    class="<?= Utils::request('action') === 'profile' && Utils::request('id') == $_SESSION['userId'] ?
+                    class="<?= Utils::request('action') === 'profile' && Utils::request('id') == $user->getId() ?
                       'nav-link fs-14 font-secondary d-flex align-items-center active' :
                       'nav-link fs-14 font-secondary d-flex align-items-center' ?>" 
-                    href="index.php?action=profile&id=<?= $_SESSION['userId'] ?>">
+                    href="index.php?action=profile&id=<?= $user->getId() ?>">
                     <?php include('img/icons/account.svg') ?>
                     <span class="ms-5">Mon compte</span>
                   </a>
@@ -74,7 +77,7 @@
                     'nav-link fs-14 font-secondary d-flex align-items-center active' :
                     'nav-link fs-14 font-secondary d-flex align-items-center' ?>" 
                   href="index.php?action=login">
-                  <?= isset($_SESSION['userId']) ? "Déconnexion" : "Connexion" ?>
+                  <?= $user ? "Déconnexion" : "Connexion" ?>
                 </a>
               </li>
             </ul>  

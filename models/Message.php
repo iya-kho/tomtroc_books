@@ -10,6 +10,7 @@ class Message extends AbstractEntity
   private int $receiverId;
   private ?DateTime $datetimeCreation = null;
   private string $content = '';
+  private bool $isRead = false;
 
   /**
    * Setter for the senderId.
@@ -84,20 +85,24 @@ class Message extends AbstractEntity
   }
 
   /**
-   * Get the interlocutor of the logged in user.
-   * @return User
+   * Setter for the isRead.
+   * @param bool $isRead
    */
-  public function getInterlocutor() : User
+  public function setIsRead(bool $isRead) : void
   {
-    $userController = new UserController();
-    $userController->checkIfUserIsConnected();
-    $userManager = new UserManager();
-
-    $interlocutorId = $this->senderId === $_SESSION['userId'] ? $this->receiverId : $this->senderId;
-    return $userManager->findUser('id', $interlocutorId);
+    $this->isRead = $isRead;
   }
 
   /**
+   * Getter for the isRead.
+   * @return bool
+   */
+  public function getIsRead() : bool
+  {
+    return $this->isRead;
+  }
+
+   /**
    * Format the date and time of creation
    * @param string $format : the format of the date and time.
    * @return string

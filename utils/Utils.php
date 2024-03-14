@@ -181,4 +181,19 @@ class Utils {
     return $text;
   }
 
+  /**
+   * Method to get the user session
+   * 
+   * @return User|null The user session
+   */
+  public static function getUserSession() : ?User
+  {
+    if (isset($_SESSION['userId'])) {
+      $userManager = new UserManager();
+      $user = $userManager->findUser('id', $_SESSION['userId']);
+      return $user;
+    }
+    return null;
+  }
+
 }
