@@ -64,7 +64,8 @@ try {
     }
 } catch (Exception $e) {
     // In case of an error, show error message.
-    echo 'Error: ' . $e->getMessage();
+    $errorView = new View('Erreur');
+    $errorView->render('errorPage', ['errorMessage' => $e->getMessage()]);;
 }
 ?>
 
