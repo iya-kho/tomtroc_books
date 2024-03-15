@@ -1,9 +1,15 @@
 <?php 
+//Start the session
+session_start(); 
 
 require_once 'config/config.php';
 require_once 'config/autoload.php';
 require_once 'config/content.php';
 require_once 'config/Router.php';
+
+// Paths
+define('TEMPLATE_VIEW_PATH', './views/templates/'); // Path to the views templates.
+define('MAIN_VIEW_PATH', './views/main.php'); // Path to the main template.
 
 // Get the action to perform
 // If no action is specified, we will display the home page
